@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BU Care - Smart Voice & Attendance Portal (Barkatullah University)</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+    :root {
+             --primary: #0f172a;
+              --accent: #ef4444;
+               --blue: #0866ff;
+             --green: #10b981;
+            --whatsapp: #25D366;
+             --bg: #f8fafc;
+            --card: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+
+    body {
+   background: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--primary);
+    }
+
+    /* Views Switching Utility */
+    .page-view { display: none; min-height: 100vh; width: 100%; }
+    .page-view.active-view { display: flex; }
+    
+            /* =========================================================
+             1. FACEBOOK-STYLE SPLIT LANDING PAGE
+               ========================================================= */
+    #landingView {
+    background: #ffffff;
+    flex-direction: row;
+    }
+    .fb-left-side {
+    flex: 1.15;
+    padding: 40px 55px;
+    display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-right: 1px solid #e2e8f0;
+            background: radial-gradient(circle at 80% 20%, #eff6ff 0%, #ffffff 70%);
+        }
+
+        .bu-top-logo { display: flex; align-items: center; gap: 12px; }
+        .bu-logo-circle {
+            width: 52px; height: 52px; background: var(--blue); color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; box-shadow: 0 8px 20px rgba(8, 102, 255, 0.25);
+        }
+
+        /* Education Collage Graphics */
+        .edu-collage-area {
+            position: relative; height: 310px; width: 100%; max-width: 460px; margin: 10px auto;
+        }
+        .collage-main-card {
+            width: 230px; height: 275px;
+            background: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80') center/cover;
+            border-radius: 22px; position: absolute; right: 40px; top: 10px;
+            box-shadow: 0 25px 45px rgba(15, 23, 42, 0.18); border: 5px solid #ffffff;
+        }
+        .collage-sub-card-1 {
+            width: 155px; height: 160px;
+            background: url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=400&q=80') center/cover;
+            border-radius: 18px; position: absolute; left: 30px; top: 25px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12); border: 4px solid #ffffff;
+        }
+        .collage-sub-card-2 {
+            width: 145px; height: 155px; background: #ffffff; border-radius: 18px;
+            position: absolute; left: 50px; bottom: -5px;
+            box-shadow: 0 18px 35px rgba(0,0,0,0.14); padding: 10px; z-index: 2;
+        }
+        .collage-sub-card-2 img { width: 100%; height: 95px; object-fit: cover; border-radius: 12px; }
+        .collage-bars { height: 8px; width: 75%; background: #e2e8f0; border-radius: 4px; margin-top: 8px; }
+        .collage-avatar-circle {
+            width: 78px; height: 78px;
+            background: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80') center/cover;
+            border-radius: 50%; border: 4px solid var(--blue); position: absolute;
+            bottom: -15px; right: 165px; z-index: 3;
+        }
+        .floating-badge-time {
+            position: absolute; top: 25px; right: 10px; background: #6366f1; color: white;
+            padding: 6px 13px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; z-index: 4;
+        }
+        .floating-badge-heart {
+            position: absolute; bottom: 50px; right: 15px; width: 46px; height: 46px;
+            background: #ff2d55; color: white; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-size: 1.3rem; z-index: 4;
+        }
+        .floating-emoji { position: absolute; top: -5px; left: 15px; font-size: 2.2rem; }
+
+        .bu-hero-text h1 { font-size: 3rem; font-weight: 800; color: #0f172a; line-height: 1.08; }
+        .bu-hero-text h1 span { color: var(--blue); }
+        .bu-hero-text p { margin-top: 12px; color: #475569; font-size: 0.98rem; line-height: 1.5; max-width: 520px; }
+
+        /* Right Side Login & Quick Buttons */
+        .fb-right-side {
+            flex: 0.85; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; padding: 35px; background: #ffffff;
+        }
+        .fb-login-card { width: 100%; max-width: 420px; }
+        .fb-login-card h3 { font-size: 1.3rem; color: #0f172a; margin-bottom: 16px; font-weight: 700; }
+
+        .fb-input {
+            width: 100%; padding: 15px 18px; border: 1.5px solid #cbd5e1;
+            border-radius: 12px; font-size: 1rem; margin-bottom: 12px;
+        }
+        .fb-input:focus { border-color: var(--blue); outline: none; box-shadow: 0 0 0 3px rgba(8, 102, 255, 0.15); }
+
+        .btn-fb-login {
+            width: 100%; padding: 14px; background: var(--blue); color: white;
+            border: none; border-radius: 999px; font-size: 1.05rem; font-weight: 700;
+            cursor: pointer; justify-content: center; display: flex; align-items: center; gap: 8px;
+        }
+        .btn-fb-login:hover { background: #0652cc; }
+
+        .forgot-pass-link {
+            display: block; text-align: center; margin: 14px 0 20px;
+            color: #0f172a; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+        }
+
+        .btn-fb-create {
+            width: 100%; padding: 13px; background: transparent; color: var(--blue);
+            border: 1.5px solid #cbd5e1; border-radius: 999px; font-size: 1rem;
+            font-weight: 600; cursor: pointer; display: flex; justify-content: center;
+        }
+        .btn-fb-create:hover { background: #f0f6ff; border-color: var(--blue); }
+
+        /* BU Care Brand Footer (Replaced Meta) */
+        .bu-care-footer {
+            margin-top: 20px; display: flex; align-items: center; justify-content: center;
+            gap: 8px; color: #1e293b; font-weight: 800; font-size: 1.05rem;
+        }
+        .bu-care-footer-badge {
+            width: 28px; height: 28px; border-radius: 8px;
+            background: linear-gradient(135deg, var(--blue), #1d4ed8);
+            color: white; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;
+        }
+
+        /* Quick Action Buttons Below BU Care Logo (Admin + Big Attendance Button) */
+        .quick-portal-actions {
+            margin-top: 20px; padding-top: 18px; border-top: 1.5px dashed #e2e8f0;
+            display: flex; flex-direction: column; gap: 12px;
+        }
+
+        .btn-admin-portal {
+            width: 100%; padding: 12px 18px; background: #0f172a; color: #ffffff;
+            border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 600;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: 0.2s;
+        }
+        .btn-admin-portal:hover { background: #1e293b; transform: translateY(-2px); }
+
+        .btn-big-attendance {
+            width: 100%; padding: 18px 20px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff; border: none; border-radius: 16px;
+            font-size: 1.18rem; font-weight: 800; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 12px 25px rgba(16, 185, 129, 0.3);
+            transition: 0.25s; letter-spacing: 0.3px;
+        }
+        .btn-big-attendance:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4); }
+
+        /* =========================================================
+           COMMON CARD & FORM STYLES FOR OTHER VIEWS
+           ========================================================= */
+        .centered-view-bg {
+            background: var(--bg); align-items: center; justify-content: center; padding: 25px 15px;
+        }
+        .card-container {
+            width: 100%; max-width: 720px; background: #ffffff;
+            border-radius: 24px; padding: 35px 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+        }
+        .input-group { margin-bottom: 16px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; color: var(--primary); font-size: 0.94rem; }
+        input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="password"], select, textarea {
+            width: 100%; padding: 13px 15px; border: 2px solid #e2e8f0;
+            border-radius: 12px; font-size: 0.98rem; background: #ffffff;
+        }
+        input:focus, select:focus, textarea:focus { border-color: var(--blue); outline: none; }
+        .row { display: flex; gap: 14px; flex-wrap: wrap; }
+        .col { flex: 1; min-width: 190px; }
+
+        .btn-primary {
+            padding: 13px 24px; border: none; border-radius: 12px; font-size: 1rem;
+            font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+            background: var(--primary); color: white;
+        }
+        .btn-secondary {
+            padding: 13px 24px; border: none; border-radius: 12px; font-size: 1rem;
+            font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+            background: #f1f5f9; color: #475569;
+        }
+
+        /* =========================================================
+           CREATE ACCOUNT MODAL
+           ========================================================= */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(5px); display: none; align-items: center;
+            justify-content: center; z-index: 1000; padding: 20px;
+        }
+        .modal-box {
+            background: #ffffff; width: 100%; max-width: 510px;
+            border-radius: 22px; padding: 30px; position: relative;
+            max-height: 92vh; overflow-y: auto;
+        }
+        .modal-close {
+            position: absolute; top: 18px; right: 20px; background: #f1f5f9;
+            border: none; width: 36px; height: 36px; border-radius: 50%;
+            font-size: 1.1rem; cursor: pointer;
+        }
+        .otp-banner {
+            background: #eff6ff; border: 1.5px dashed var(--blue);
+            padding: 12px 15px; border-radius: 12px; margin: 12px 0; font-size: 0.9rem;
+        }
+
+        /* =========================================================
+           FULL-SCREEN STAFF DASHBOARD
+           ========================================================= */
+        #staffDashboardView { background: #f1f5f9; flex-direction: column; }
+        .dashboard-navbar {
+            background: #0f172a; color: white; padding: 18px 35px;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
+        }
+        .dashboard-tabs {
+            background: #ffffff; padding: 12px 35px; border-bottom: 1px solid #e2e8f0;
+            display: flex; gap: 12px; flex-wrap: wrap;
+        }
+        .dash-tab-btn {
+            background: #f1f5f9; color: #475569; padding: 10px 20px;
+            border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; border: none;
+        }
+        .dash-tab-btn.active { background: var(--blue); color: white; }
+        .dashboard-content { padding: 30px 35px; max-width: 1300px; width: 100%; margin: 0 auto; }
+        .dash-card { background: #ffffff; border-radius: 18px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.04); }
+
+        .admin-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.92rem; }
+        .admin-table th, .admin-table td { border: 1px solid #e2e8f0; padding: 12px 14px; text-align: left; }
+        .admin-table th { background: #0f172a; color: white; }
+        .admin-table tr:nth-child(even) { background: #f8fafc; }
+
+        .attendance-total-bar {
+            background: #0f172a; color: #ffffff; padding: 16px 22px; border-radius: 12px;
+            margin-top: 15px; display: flex; justify-content: space-between; align-items: center;
+            font-size: 1.15rem; font-weight: 700;
+        }
+
+        /* Complaint Specific */
+        .category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px; }
+        .category-card {
+            background: #ffffff; border: 2px solid #e2e8f0; padding: 20px;
+            border-radius: 16px; text-align: center; cursor: pointer; transition: 0.25s;
+        }
+        .category-card i { font-size: 2rem; color: #64748b; margin-bottom: 8px; }
+        .category-card span { display: block; font-weight: 600; }
+        .category-card.selected { border-color: var(--blue); background: #eff6ff; }
+        .category-card.selected i { color: var(--blue); }
+
+        .anon-box {
+            background: #f8fafc; border: 2px solid #e2e8f0; padding: 15px;
+            border-radius: 12px; display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 18px; cursor: pointer;
+        }
+        .anon-box.active { border-color: var(--accent); background: #fef2f2; }
+
+        .ai-preview-card {
+            background: #1e293b; color: white; padding: 20px; border-radius: 16px;
+            text-align: left; margin-top: 25px; border-left: 5px solid var(--blue);
+        }
+        .red-alert { background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; color: white; padding: 16px; border-radius: 12px; margin-top: 15px; }
+        .wa-dispatch-box { background: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 12px 15px; margin-top: 12px; font-size: 0.9rem; color: #cbd5e1; }
+
+        @media print {
+            body * { visibility: hidden; }
+            #printableAttendanceArea, #printableAttendanceArea * { visibility: visible; }
+            #printableAttendanceArea { position: absolute; left: 0; top: 0; width: 100%; }
+            .no-print { display: none !important; }
+        }
+
+        @media (max-width: 900px) {
+            #landingView { flex-direction: column; }
+            .fb-left-side { border-right: none; border-bottom: 1px solid #e2e8f0; padding: 30px 25px; }
+            .edu-collage-area { display: none; }
+            .bu-hero-text h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =========================================================================
+         VIEW 1: MAIN LANDING PAGE (FB STYLE + ADMIN BUTTON + BIG ATTENDANCE BUTTON)
+         ========================================================================= -->
+    <div id="landingView" class="page-view active-view">
+        
+        <!-- Left Side: BU Bhopal Showcase -->
+        <div class="fb-left-side">
+            <div class="bu-top-logo">
+                <div class="bu-logo-circle"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div>
+                    <strong style="font-size: 1.4rem; color: #0f172a; display: block; line-height: 1;">BU Care</strong>
+                    <span style="font-size: 0.82rem; color: #64748b; font-weight: 600;">Barkatullah University, Bhopal</span>
+                </div>
+            </div>
+
+            <div class="edu-collage-area">
+                <div class="floating-emoji">🎓</div>
+                <div class="collage-sub-card-1"></div>
+                <div class="collage-main-card"></div>
+                <div class="floating-badge-time"><i class="fa-solid fa-bolt"></i> Smart Campus</div>
+                <div class="floating-badge-heart"><i class="fa-solid fa-shield-heart"></i></div>
+                <div class="collage-sub-card-2">
+                    <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=400&q=80" alt="BU Students">
+                    <div class="collage-bars"></div>
+                    <div class="collage-bars" style="width: 50%;"></div>
+                </div>
+                <div class="collage-avatar-circle"></div>
+            </div>
+
+            <div class="bu-hero-text">
+                <h1>Empower the campus <span>you love.</span></h1>
+                <p>
+                    <strong>Barkatullah University, Bhopal (NAAC Accredited)</strong> — Fostering academic excellence, digital innovation, and a safe, ragging-free environment across UIT, BCA, MCA, Pharmacy, Law, and all university departments.
+                </p>
+            </div>
+        </div>
+
+        <!-- Right Side: Login + Create Account + Admin Login + Big Attendance Button -->
+        <div class="fb-right-side">
+            <div class="fb-login-card">
+                <h3>Log in to BU Care (Complaint Portal)</h3>
+
+                <form onsubmit="handleStudentLogin(event)">
+                    <input type="text" id="loginIdentifier" class="fb-input" placeholder="Email address or mobile number" required>
+                    <input type="password" id="loginPassword" class="fb-input" placeholder="Password" required>
+                    <button type="submit" class="btn-fb-login">Log in</button>
+                </form>
+
+                <span class="forgot-pass-link" onclick="alert('Please contact BU Care Admin (00bucare@gmail.com) or create a new account.')">Forgotten password?</span>
+
+                <button type="button" class="btn-fb-create" onclick="openCreateAccountModal()">
+                    Create new account
+                </button>
+
+                <!-- BU Care Logo -->
+                <div class="bu-care-footer">
+                    <div class="bu-care-footer-badge"><i class="fa-solid fa-shield-halved"></i></div>
+                    <span>BU Care</span>
+                </div>
+
+                <!-- ADMIN BUTTON & BIG ATTENDANCE BUTTON RIGHT BELOW -->
+                <div class="quick-portal-actions">
+                    <button type="button" class="btn-admin-portal" onclick="showView('staffLoginView')">
+                        <i class="fa-solid fa-user-lock"></i> Faculty / Admin Panel Login
+                    </button>
+
+                    <button type="button" class="btn-big-attendance" onclick="openDirectAttendancePage()">
+                        <i class="fa-solid fa-calendar-check" style="font-size: 1.4rem;"></i> MARK CLASS ATTENDANCE
+                    </button>
+                    <div id="landingLockNotice" style="text-align: center; font-size: 0.82rem; color: #ef4444; font-weight: 700; display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         MODAL: CREATE NEW STUDENT ACCOUNT (OTP FROM 00bucare@gmail.com)
+         ========================================================================= -->
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal-box">
+            <button type="button" class="modal-close" onclick="closeCreateAccountModal()"><i class="fa-solid fa-xmark"></i></button>
+            <h2 style="font-size: 1.5rem; margin-bottom: 4px;">Create Student Account 🎓</h2>
+            <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 16px;">Verification OTP will be sent to your Email from <strong>00bucare@gmail.com</strong>.</p>
+
+            <form id="registrationForm" onsubmit="completeStudentRegistration(event)">
+                <div class="row">
+                    <div class="col input-group">
+                        <label>First Name</label>
+                        <input type="text" id="regFirstName" placeholder="e.g. Kartikey" required>
+                    </div>
+                    <div class="col input-group">
+                        <label>Surname</label>
+                        <input type="text" id="regSurname" placeholder="e.g. Pandey" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col input-group">
+                        <label>Phone Number 📱</label>
+                        <input type="tel" id="regPhone" placeholder="10-digit mobile number" maxlength="10" required>
+                    </div>
+                    <div class="col input-group">
+                        <label>Date of Birth (DOB) 🎂</label>
+                        <input type="date" id="regDob" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Email Address (For OTP) 📧</label>
+                    <input type="email" id="regEmail" placeholder="yourname@gmail.com" required>
+                </div>
+
+                <button type="button" id="sendOtpBtn" onclick="sendEmailOtp()" class="btn-fb-login" style="border-radius: 12px;">
+                    <i class="fa-solid fa-envelope-circle-check"></i> Send OTP to Email (via 00bucare@gmail.com)
+                </button>
+
+                <div id="otpVerifySection" style="display: none; margin-top: 15px;">
+                    <div class="otp-banner" id="otpStatusBanner"></div>
+                    <div class="row" style="align-items: flex-end;">
+                        <div class="col input-group" style="margin-bottom: 0;">
+                            <label>Enter 6-Digit Email OTP</label>
+                            <input type="text" id="regOtpInput" placeholder="Enter 6-digit OTP">
+                        </div>
+                        <button type="button" onclick="verifyStudentOtp()" class="btn-primary" style="height: 48px;">
+                            Verify OTP <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="passwordCreateSection" style="display: none; margin-top: 18px;">
+                    <div class="input-group">
+                        <label>Create Your Password 🔒</label>
+                        <input type="password" id="regPassword" placeholder="Create password for login">
+                    </div>
+                    <button type="submit" class="btn-fb-login" style="background: var(--green); border-radius: 12px;">
+                        Complete Registration <i class="fa-solid fa-circle-check"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         VIEW 2: DIRECT STUDENT ATTENDANCE PAGE (BCA 1,2,3 & MCA 1,2 + 70-MIN LOCK)
+         ========================================================================= -->
+    <div id="attendanceView" class="page-view centered-view-bg">
+        <div class="card-container" style="max-width: 580px;">
+            
+            <!-- Step 1: Select BCA/MCA and Year -->
+            <div id="attStep1">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+                    <div style="width: 48px; height: 48px; background: #dcfce7; color: var(--green); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+                    <div>
+                        <h2 style="font-size: 1.65rem; margin: 0;">Mark Class Attendance</h2>
+                        <p style="color: #64748b; font-size: 0.9rem;">Select your Department and Academic Year</p>
+                    </div>
+                </div>
+
+                <div class="input-group" style="margin-top: 22px;">
+                    <label>Select Department</label>
+                    <select id="attDept" onchange="updateAttendanceYearOptions()">
+                        <option value="">-- Choose Department --</option>
+                        <option value="BCA">BCA (Bachelor of Computer Applications)</option>
+                        <option value="MCA">MCA (Master of Computer Applications)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Select Academic Year</label>
+                    <select id="attYear">
+                        <option value="">-- Select Department First --</option>
+                    </select>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-top: 25px;">
+                    <button type="button" class="btn-secondary" onclick="showView('landingView')">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Home
+                    </button>
+                    <button type="button" class="btn-primary" onclick="goToAttendanceStep2()">
+                        Next Step <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Enter Name, Phone & Click Present -->
+            <div id="attStep2" style="display: none;">
+                <h2 style="font-size: 1.65rem; margin-bottom: 5px;">Confirm Your Presence ✋</h2>
+                <p id="attSelectedCourseText" style="color: var(--blue); font-weight: 700; margin-bottom: 20px;"></p>
+
+                <div class="input-group">
+                    <label>Student Full Name</label>
+                    <input type="text" id="attStudentName" placeholder="Enter your full name">
+                </div>
+
+                <div class="input-group">
+                    <label>Phone Number 📱</label>
+                    <input type="tel" id="attStudentPhone" placeholder="Enter 10-digit mobile number" maxlength="10">
+                </div>
+
+                <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 10px; margin-bottom: 18px; font-size: 0.88rem; color: #334155;">
+                    <i class="fa-solid fa-shield-halved" style="color: var(--green);"></i> <strong>Anti-Proxy Lock Active:</strong> Once marked, your IP & phone browser will be locked for <strong>1 Hour 10 Minutes</strong>.
+                </div>
+
+                <button type="button" id="markPresentBtn" onclick="submitStudentAttendance()" class="btn-big-attendance" style="width: 100%;">
+                    <i class="fa-solid fa-hand-point-up"></i> PRESENT (Submit Attendance)
+                </button>
+
+                <button type="button" class="btn-secondary" onclick="backToAttStep1()" style="margin-top: 15px; width: 100%; justify-content: center;">
+                    <i class="fa-solid fa-arrow-left"></i> Change Department / Year
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         VIEW 3: FULL-SCREEN STAFF / ADMIN LOGIN PAGE (Bu0001 & Boss0101)
+         ========================================================================= -->
+    <div id="staffLoginView" class="page-view centered-view-bg" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+        <div class="card-container" style="max-width: 440px;">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <div style="width: 60px; height: 60px; background: #eff6ff; color: var(--blue); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 12px;">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <h2 style="font-size: 1.6rem;">Official Staff Login</h2>
+                <p style="color: #64748b; font-size: 0.9rem;">Enter Faculty ID or Super Admin ID</p>
+            </div>
+
+            <form onsubmit="handleStaffLogin(event)">
+                <div class="input-group">
+                    <label>Official ID Number</label>
+                    <input type="text" id="staffIdInput" placeholder="Enter ID Number required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="staffPassInput" placeholder="Enter Password" required>
+                </div>
+                <button type="submit" class="btn-fb-login" style="border-radius: 12px; margin-top: 10px;">
+                    Open Full-Screen Dashboard <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <button type="button" class="btn-secondary" onclick="showView('landingView')" style="width: 100%; justify-content: center; margin-top: 14px;">
+                <i class="fa-solid fa-arrow-left"></i> Back to Home Page
+            </button>
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         VIEW 4: FULL-SCREEN STAFF & ADMIN DASHBOARD PAGE
+         ========================================================================= -->
+    <div id="staffDashboardView" class="page-view">
+        <div class="dashboard-navbar no-print">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <div class="bu-care-footer-badge" style="width: 38px; height: 38px; font-size: 1.1rem;"><i class="fa-solid fa-shield-halved"></i></div>
+                <div>
+                    <strong style="font-size: 1.25rem; display: block;">BU Care - Official ERP Dashboard</strong>
+                    <span id="staffRoleBadge" style="font-size: 0.84rem; color: #38bdf8;"></span>
+                </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                <button type="button" id="gpsToggleBtn" onclick="toggleGpsStrictMode()" style="display: none; padding: 9px 14px; border-radius: 10px; font-size: 0.85rem; border: none; font-weight: 700; cursor: pointer;"></button>
+
+                <button type="button" onclick="showView('landingView')" style="background: #ef4444; color: white; padding: 9px 18px; border-radius: 10px; font-size: 0.9rem; border: none; font-weight: 600; cursor: pointer;">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <!-- Dashboard Navigation Tabs -->
+        <div class="dashboard-tabs no-print">
+            <button type="button" class="dash-tab-btn active" id="tabBtnAttendance" onclick="switchDashboardTab('attendance')">
+                <i class="fa-solid fa-clipboard-user"></i> 1. Attendance List
+            </button>
+            <button type="button" class="dash-tab-btn" id="tabBtnComplaints" onclick="switchDashboardTab('complaints')">
+                <i class="fa-solid fa-triangle-exclamation"></i> 2. Complaints & AI Summary
+            </button>
+            <!-- Tab 3: Super Admin Boss0101 Exclusive -->
+            <button type="button" class="dash-tab-btn" id="tabBtnStudents" onclick="switchDashboardTab('students')" style="display: none;">
+                <i class="fa-solid fa-users-gear"></i> 3. Registered Students Info (Admin Only)
+            </button>
+        </div>
+
+        <div class="dashboard-content">
+            
+            <!-- TAB 1: ATTENDANCE LIST (S.No 1,2,3 + Name + Phone + Total + PDF/CSV) -->
+            <div id="dashTabAttendance" class="dash-card">
+                <div class="no-print" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 18px;">
+                    <div>
+                        <h3 style="font-size: 1.4rem;">Daily Student Attendance Sheet 📋</h3>
+                        <p style="color: #64748b; font-size: 0.9rem;">Serial-wise list of present students with total count at the bottom.</p>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <input type="date" id="adminDateFilter" onchange="renderDashboardData()" style="width: auto; padding: 9px 14px; border: 2px solid #cbd5e1; border-radius: 12px; font-weight: 600;">
+                        <select id="adminAttendanceFilter" onchange="renderDashboardData()" style="width: auto; padding: 10px 14px;">
+                            <option value="ALL">All Batches (BCA & MCA)</option>
+                            <option value="BCA - 1st Year">BCA - 1st Year</option>
+                            <option value="BCA - 2nd Year">BCA - 2nd Year</option>
+                            <option value="BCA - 3rd Year">BCA - 3rd Year</option>
+                            <option value="MCA - 1st Year">MCA - 1st Year</option>
+                            <option value="MCA - 2nd Year">MCA - 2nd Year</option>
+                        </select>
+                        <button type="button" class="btn-primary" onclick="window.print()" style="background: var(--blue);">
+                            <i class="fa-solid fa-file-pdf"></i> Download PDF
+                        </button>
+                        <button type="button" class="btn-primary" onclick="downloadAttendanceExcel()" style="background: var(--green);">
+                            <i class="fa-solid fa-file-excel"></i> Export Excel
+                        </button>
+                    </div>
+                </div>
+
+                <div id="printableAttendanceArea">
+                    <div style="text-align: center; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 2px solid #e2e8f0;">
+                        <h2 style="font-size: 1.4rem; margin: 0;">Barkatullah University, Bhopal — BU Care Attendance Sheet</h2>
+                        <p style="color: #475569; font-size: 0.9rem;">Report Date: <span id="reportDateDisplay"></span></p>
+                    </div>
+
+                    <div style="overflow-x: auto;">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 75px;">S.No</th>
+                                    <th>Student Name</th>
+                                    <th>Phone Number</th>
+                                    <th>Department & Year</th>
+                                    <th>Time & IP Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="attendanceTableBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="attendance-total-bar">
+                        <span>Total Students Present Today:</span>
+                        <span id="attendanceTotalCount" style="color: #38bdf8; font-size: 1.45rem;">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: COMPLAINTS & AI SUMMARY -->
+            <div id="dashTabComplaints" class="dash-card" style="display: none;">
+                <h3 style="font-size: 1.4rem; margin-bottom: 6px;">Student Complaints & Anti-Ragging AI Logs 🚨</h3>
+                <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 15px;">All complaints submitted by students along with AI executive summaries.</p>
+
+                <div style="overflow-x: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Ticket ID</th>
+                                <th>Student Info</th>
+                                <th>Dept & Location</th>
+                                <th>Category</th>
+                                <th>AI Summary</th>
+                                <th>Full Complaint</th>
+                            </tr>
+                        </thead>
+                        <tbody id="complaintsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 3: REGISTERED STUDENT ACCOUNTS (ONLY FOR BOSS0101) -->
+            <div id="dashTabStudents" class="dash-card" style="display: none;">
+                <h3 style="font-size: 1.4rem; margin-bottom: 6px;">Registered Student Accounts (Super Admin Exclusive) 👥</h3>
+                <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 15px;">Complete personal details submitted during Create Account registration.</p>
+
+                <div style="overflow-x: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Full Name (Name & Surname)</th>
+                                <th>Phone Number</th>
+                                <th>Verified Email ID</th>
+                                <th>Date of Birth (DOB)</th>
+                                <th>Registered On</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         VIEW 5: STUDENT COMPLAINT PORTAL (Opens after Student Login)
+         ========================================================================= -->
+    <div id="complaintPortalView" class="page-view centered-view-bg">
+        <div class="card-container">
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; background: #f1f5f9; padding: 12px 16px; border-radius: 12px; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                <div>
+                    <i class="fa-solid fa-circle-user" style="color: var(--blue);"></i>
+                    Logged in: <strong id="loggedStudentNameDisplay"></strong> (<span id="loggedEmailDisplay"></span>)
+                </div>
+                <button type="button" onclick="showView('landingView')" style="background: #fee2e2; color: #dc2626; padding: 6px 14px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer;">
+                    Logout
+                </button>
+            </div>
+
+            <form id="smartForm">
+                <!-- STEP 1 -->
+                <div id="compStep1">
+                    <h2 style="font-size: 1.75rem; margin-bottom: 6px;">What do you need help with? 👋</h2>
+                    <p style="color: #64748b; margin-bottom: 20px;">Select a category and location.</p>
+                    
+                    <div class="category-grid">
+                        <div class="category-card" onclick="selectCategory(this, 'Infrastructure')">
+                            <i class="fa-solid fa-building"></i><span>Infrastructure</span>
+                        </div>
+                        <div class="category-card" onclick="selectCategory(this, 'Academics')">
+                            <i class="fa-solid fa-book-open"></i><span>Academics (Class)</span>
+                        </div>
+                        <div class="category-card" onclick="selectCategory(this, 'Discipline / Ragging')">
+                            <i class="fa-solid fa-shield-halved"></i><span>Discipline / Ragging</span>
+                        </div>
+                        <div class="category-card" onclick="selectCategory(this, 'Hostel / Canteen')">
+                            <i class="fa-solid fa-bed"></i><span>Hostel / Canteen</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Where is this happening? 📍</label>
+                        <select id="location" required>
+                            <option value="">-- Select Exact Location --</option>
+                            <option value="UIT Academic Block">UIT Academic Block</option>
+                            <option value="Central Library">Central Library</option>
+                            <option value="Law & Management Block">Law & Management Block</option>
+                            <option value="Pharmacy Department">Pharmacy Department</option>
+                            <option value="University Hostels">University Hostels</option>
+                            <option value="Canteen Area">Canteen Area</option>
+                            <option value="Campus Ground / Parking">Campus Ground / Parking</option>
+                            <option value="Other / Not Specific">Other / Not Specific</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
+                        <button type="button" class="btn-primary" onclick="goCompStep(2)">Next Step <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- STEP 2 -->
+                <div id="compStep2" style="display: none;">
+                    <h2 style="font-size: 1.75rem; margin-bottom: 6px;">About You 🎓</h2>
+                    <p style="color: #64748b; margin-bottom: 20px;">You can choose to hide your identity from authorities.</p>
+
+                    <div class="anon-box" id="anonBox" onclick="toggleAnonymous()">
+                        <div>
+                            <strong><i class="fa-solid fa-user-ninja"></i> Report Anonymously</strong>
+                            <p style="font-size: 0.85rem; color: #64748b;">Your name & Gmail will be hidden from the department</p>
+                        </div>
+                        <input type="checkbox" id="anonCheckbox" style="width: 20px; height: 20px; pointer-events: none;">
+                    </div>
+
+                    <div id="personalDetails">
+                        <div class="input-group">
+                            <label>Full Name</label>
+                            <input type="text" id="studentName" placeholder="Enter your full name">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col input-group">
+                            <label>Department / Course (BU)</label>
+                            <select id="department" onchange="checkOtherDepartment()" required>
+                                <option value="">-- Select Department --</option>
+                                <option value="BCA">BCA</option>
+                                <option value="MCA">MCA</option>
+                                <option value="B.Tech (UIT)">B.Tech (UIT)</option>
+                                <option value="M.Tech (UIT)">M.Tech (UIT)</option>
+                                <option value="B.Pharm">B.Pharm (Pharmacy)</option>
+                                <option value="M.Pharm">M.Pharm (Pharmacy)</option>
+                                <option value="LLB">LLB (Law)</option>
+                                <option value="BA LLB (Hons)">BA LLB (Hons)</option>
+                                <option value="LLM">LLM</option>
+                                <option value="BBA">BBA</option>
+                                <option value="MBA">MBA</option>
+                                <option value="B.Com / M.Com">B.Com / M.Com</option>
+                                <option value="B.Sc / M.Sc">B.Sc / M.Sc</option>
+                                <option value="Life Sciences">Life Sciences</option>
+                                <option value="BA / MA">BA / MA</option>
+                                <option value="B.Ed / M.Ed">B.Ed / M.Ed</option>
+                                <option value="B.P.Ed / M.P.Ed">B.P.Ed / M.P.Ed</option>
+                                <option value="Ph.D">Ph.D / Research</option>
+                                <option value="Other">Other (Specify Manually)</option>
+                            </select>
+                        </div>
+
+                        <div class="col input-group">
+                            <label>Batch / Year</label>
+                            <select id="batchYear" required>
+                                <option value="">-- Select Year --</option>
+                                <option value="1st Year">1st Year</option>
+                                <option value="2nd Year">2nd Year</option>
+                                <option value="3rd Year">3rd Year</option>
+                                <option value="4th Year">4th Year</option>
+                                <option value="5th Year">5th Year</option>
+                                <option value="PG / Scholar">PG / Scholar</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group" id="otherDeptContainer" style="display: none;">
+                        <label>Specify Your Department Name ✍️</label>
+                        <input type="text" id="otherDeptInput" placeholder="Write your Department name...">
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                        <button type="button" class="btn-secondary" onclick="goCompStep(1)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                        <button type="button" class="btn-primary" onclick="goCompStep(3)">Final Step <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- STEP 3 -->
+                <div id="compStep3" style="display: none;">
+                    <h2 style="font-size: 1.75rem; margin-bottom: 6px;">Describe the Issue ✍️</h2>
+                    <p style="color: #64748b; margin-bottom: 20px;">Our AI summarizes long complaints & automatically dispatches a silent WhatsApp alert to the Dean/HOD for ragging cases.</p>
+
+                    <div class="input-group">
+                        <label>Detailed Description</label>
+                        <textarea id="description" rows="5" placeholder="Explain the problem in detail. Example: Kuch seniors hostel ke paas ragging aur maar peet kar rahe hain..." required></textarea>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                        <button type="button" class="btn-secondary" onclick="goCompStep(2)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                        <button type="submit" class="btn-primary" style="background: var(--accent);">Submit Complaint <i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- COMPLAINT SUCCESS SCREEN -->
+            <div id="successScreen" style="display: none; text-align: center; padding: 15px 0;">
+                <i class="fa-solid fa-circle-check" style="font-size: 4rem; color: #10b981; margin-bottom: 10px;"></i>
+                <h2>Complaint Logged Successfully!</h2>
+                <p style="color: #64748b;">Ticket ID: <strong>#BU-<span id="ticketId"></span></strong></p>
+
+                <div class="ai-preview-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="background: var(--blue); padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 700;">AI Backend Summary</span>
+                        <span id="severityBadge" style="padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 700;"></span>
+                    </div>
+                    <p id="aiSummaryText" style="color: #e2e8f0; font-size: 0.95rem; line-height: 1.5;"></p>
+
+                    <div id="aiAlertBox" class="red-alert" style="display: none;">
+                        <strong style="color: #ffffff;">🚨 SOS RAGGING / VIOLENCE DETECTED BY AI</strong>
+                        <div class="wa-dispatch-box">
+                            <div id="waLog1"><i class="fa-solid fa-spinner fa-spin"></i> Connecting to BU WhatsApp Bot...</div>
+                            <div id="waLog2" style="display: none; margin-top: 6px; color: #25D366; font-weight: 700;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-primary" onclick="resetComplaintForm()" style="margin-top: 20px;">
+                    Submit Another Complaint
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // ============================================================================
+        // 1. WHATSAPP BOT NUMBERS & STAFF ID/PASS CONFIGURATION
+        // ============================================================================
+        
+        // 👉 RAGGING WHATSAPP BOT NUMBERS (Yahan apna aur Dean/HOD ka number daalna hai):
+        const EMERGENCY_CONTACTS = [
+            {
+                role: "Portal Admin (Kartikey)",
+                phone: "916265151482",   // <-- 91 ke sath 10-digit WhatsApp Number
+                apiKey: "123456",        // <-- CallMeBot 6-digit API Key
+                active: true
+            },
+            {
+                role: "Dean Student Welfare",
+                phone: "919876543211",   // <-- Dean Sir ka WhatsApp Number
+                apiKey: "654321",
+                active: true
+            },
+            {
+                role: "HOD Department",
+                phone: "919876543212",   // <-- HOD ka WhatsApp Number
+                apiKey: "789012",
+                active: true
+            }
+        ];
+
+        // 👉 FACULTY AUR SUPER ADMIN KE EXACT ID AUR PASSWORD:
+        const STAFF_CREDENTIALS = {
+            faculty: { id: "Bu0001", pass: "Faculty908", roleName: "Faculty / Teacher Access (Attendance & Complaints)" },
+            admin:   { id: "Boss0101", pass: "Admin709", roleName: "Super Admin Access (Full Portal Control)" }
+        };
+
+        // 👉 EMAIL OTP SENDER GMAIL:
+        const OFFICIAL_OTP_EMAIL = "00bucare@gmail.com";
+        const GOOGLE_SCRIPT_OTP_URL = "https://script.google.com/macros/s/AKfycbxiBzZmy5seUFSqp1gebYqm8QkSKB6hmil6p4SPrwOJkNuWwfUVNOSEzehJHugMnQKS/exec"; // Paste Google Apps Script Web App URL here
+
+        // 👉 GPS CAMPUS COORDINATES & 70-MINUTE LOCK:
+        const BU_CAMPUS_LAT = 23.2032;
+        const BU_CAMPUS_LNG = 77.4560;
+        const ALLOWED_RADIUS_KM = 0.8;
+        const ATTENDANCE_LOCK_MS = 70 * 60 * 1000; // 1 Hour 10 Minutes
+
+        // State Variables
+        let currentStudent = null;
+        let selectedCategory = "";
+        let isAnonymous = false;
+        let generatedOtpCode = "";
+        let isOtpVerified = false;
+        let currentStaffRole = null;
+        let liveUserIp = "103.BU.CAMPUS";
+
+        fetch("https://api.ipify.org?format=json")
+            .then(r => r.json())
+            .then(d => { liveUserIp = d.ip; })
+            .catch(() => {});
+
+        // ============================================================================
+        // 2. MASTER PAGE SWITCHER (Guarantees every page opens smoothly!)
+        // ============================================================================
+        function showView(viewId) {
+            document.querySelectorAll(".page-view").forEach(v => v.classList.remove("active-view"));
+            document.getElementById(viewId).classList.add("active-view");
+            window.scrollTo(0, 0);
+            if (viewId === "landingView") {
+                checkLandingAttendanceLock();
+            }
+        }
+
+        // ============================================================================
+        // 3. CREATE ACCOUNT + EMAIL OTP FROM 00bucare@gmail.com
+        // ============================================================================
+        function openCreateAccountModal() {
+            document.getElementById("registrationForm").reset();
+            document.getElementById("otpVerifySection").style.display = "none";
+            document.getElementById("passwordCreateSection").style.display = "none";
+            isOtpVerified = false;
+            document.getElementById("registerModal").style.display = "flex";
+        }
+
+        function closeCreateAccountModal() {
+            document.getElementById("registerModal").style.display = "none";
+        }
+
+        async function sendEmailOtp() {
+            const firstName = document.getElementById("regFirstName").value.trim();
+            const surname = document.getElementById("regSurname").value.trim();
+            const phone = document.getElementById("regPhone").value.trim();
+            const dob = document.getElementById("regDob").value;
+            const email = document.getElementById("regEmail").value.trim();
+
+            if (!firstName || !surname || phone.length !== 10 || !dob || !email) {
+                alert("Please fill First Name, Surname, 10-digit Phone No., DOB, and Email properly!");
+                return;
+            }
+
+            generatedOtpCode = Math.floor(100000 + Math.random() * 900000).toString();
+            isOtpVerified = false;
+
+            if (GOOGLE_SCRIPT_OTP_URL) {
+                try {
+                    fetch(GOOGLE_SCRIPT_OTP_URL, {
+                        method: "POST",
+                        mode: "no-cors",
+                        body: JSON.stringify({ toEmail: email, studentName: `${firstName} ${surname}`, otp: generatedOtpCode })
+                    });
+                } catch (e) {}
+            }
+
+            document.getElementById("otpVerifySection").style.display = "block";
+            document.getElementById("otpStatusBanner").innerHTML = 
+                `📧 <strong>OTP Sent from ${OFFICIAL_OTP_EMAIL} to ${email}!</strong><br>
+                 <span style="font-size:0.82rem;">${!GOOGLE_SCRIPT_OTP_URL ? `(Instant Verification OTP Code: <strong>${generatedOtpCode}</strong>)` : 'Check your Gmail inbox.'}</span>`;
+        }
+
+        function verifyStudentOtp() {
+            const entered = document.getElementById("regOtpInput").value.trim();
+            if (entered === generatedOtpCode && generatedOtpCode !== "") {
+                isOtpVerified = true;
+                document.getElementById("otpStatusBanner").style.background = "#dcfce7";
+                document.getElementById("otpStatusBanner").innerHTML = `✅ <strong>Email OTP Verified!</strong> Now create your password below.`;
+                document.getElementById("passwordCreateSection").style.display = "block";
+                document.getElementById("regPassword").required = true;
+            } else {
+                alert("Wrong OTP! Please enter the correct 6-digit OTP.");
+            }
+        }
+
+        function completeStudentRegistration(e) {
+            e.preventDefault();
+            if (!isOtpVerified) {
+                alert("Please verify your OTP first!");
+                return;
+            }
+
+            const firstName = document.getElementById("regFirstName").value.trim();
+            const surname = document.getElementById("regSurname").value.trim();
+            const phone = document.getElementById("regPhone").value.trim();
+            const dob = document.getElementById("regDob").value;
+            const email = document.getElementById("regEmail").value.trim();
+            const password = document.getElementById("regPassword").value;
+
+            const users = JSON.parse(localStorage.getItem("bu_care_students") || "[]");
+            users.push({
+                fullName: `${firstName} ${surname}`,
+                phone,
+                dob,
+                email,
+                password,
+                registeredAt: new Date().toLocaleString()
+            });
+            localStorage.setItem("bu_care_students", JSON.stringify(users));
+
+            alert("🎉 Registration Successful! Now login using your Email/Phone and the Password you created.");
+            closeCreateAccountModal();
+            document.getElementById("loginIdentifier").value = email;
+            document.getElementById("loginPassword").focus();
+        }
+
+        function handleStudentLogin(e) {
+            e.preventDefault();
+            const idVal = document.getElementById("loginIdentifier").value.trim().toLowerCase();
+            const passVal = document.getElementById("loginPassword").value;
+
+            const users = JSON.parse(localStorage.getItem("bu_care_students") || "[]");
+            const found = users.find(u => (u.email.toLowerCase() === idVal || u.phone === idVal) && u.password === passVal);
+
+            if (found) {
+                currentStudent = found;
+                document.getElementById("loggedStudentNameDisplay").innerText = found.fullName;
+                document.getElementById("loggedEmailDisplay").innerText = found.email;
+                document.getElementById("studentName").value = found.fullName;
+                showView("complaintPortalView");
+            } else {
+                alert("❌ Invalid Email/Phone or Password! New students please click 'Create new account' first.");
+            }
+        }
+
+        // ============================================================================
+        // 4. DIRECT CLASS ATTENDANCE SYSTEM (BCA 1,2,3 & MCA 1,2 + 70-MIN IP LOCK)
+        // ============================================================================
+        function checkLandingAttendanceLock() {
+            const lockData = JSON.parse(localStorage.getItem("bu_att_lock") || "null");
+            const notice = document.getElementById("landingLockNotice");
+            if (lockData && (Date.now() - lockData.timestamp < ATTENDANCE_LOCK_MS)) {
+                const minsLeft = Math.ceil((ATTENDANCE_LOCK_MS - (Date.now() - lockData.timestamp)) / 60000);
+                notice.style.display = "block";
+                notice.innerText = `🔒 Attendance Locked on this Phone/IP for ${minsLeft} mins`;
+                return minsLeft;
+            } else {
+                notice.style.display = "none";
+                return 0;
+            }
+        }
+
+        function openDirectAttendancePage() {
+            const minsLeft = checkLandingAttendanceLock();
+            if (minsLeft > 0) {
+                alert(`⏳ Proxy Lock Active!\nAttendance is already marked from this Phone / IP (${liveUserIp}).\nYou cannot open the attendance link again for ${minsLeft} minutes.`);
+                return;
+            }
+            document.getElementById("attStep1").style.display = "block";
+            document.getElementById("attStep2").style.display = "none";
+            showView("attendanceView");
+        }
+
+        function updateAttendanceYearOptions() {
+            const dept = document.getElementById("attDept").value;
+            const yearSelect = document.getElementById("attYear");
+            yearSelect.innerHTML = `<option value="">-- Select Year --</option>`;
+            if (dept === "BCA") {
+                yearSelect.innerHTML += `
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                `;
+            } else if (dept === "MCA") {
+                yearSelect.innerHTML += `
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                `;
+            }
+        }
+
+        function goToAttendanceStep2() {
+            const dept = document.getElementById("attDept").value;
+            const year = document.getElementById("attYear").value;
+            if (!dept || !year) {
+                alert("Please select both Department (BCA/MCA) and Year!");
+                return;
+            }
+            document.getElementById("attSelectedCourseText").innerText = `Selected Batch: ${dept} - ${year}`;
+            document.getElementById("attStep1").style.display = "none";
+            document.getElementById("attStep2").style.display = "block";
+        }
+
+        function backToAttStep1() {
+            document.getElementById("attStep2").style.display = "none";
+            document.getElementById("attStep1").style.display = "block";
+        }
+
+        function calculateDistanceKm(lat1, lon1, lat2, lon2) {
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLon/2) * Math.sin(dLon/2);
+            return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
+        }
+
+        function submitStudentAttendance() {
+            const name = document.getElementById("attStudentName").value.trim();
+            const phone = document.getElementById("attStudentPhone").value.trim();
+            const dept = document.getElementById("attDept").value;
+            const year = document.getElementById("attYear").value;
+
+            if (!name || phone.length !== 10 || isNaN(phone)) {
+                alert("Please enter your full name and a valid 10-digit mobile number!");
+                return;
+            }
+
+            const gpsStrict = localStorage.getItem("bu_gps_strict") === "true";
+            if (gpsStrict && navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        const dist = calculateDistanceKm(pos.coords.latitude, pos.coords.longitude, BU_CAMPUS_LAT, BU_CAMPUS_LNG);
+                        if (dist > ALLOWED_RADIUS_KM) {
+                            alert(`❌ Outside Campus!\nYou are ${dist.toFixed(2)} KM away from BU Campus. Attendance blocked!`);
+                            return;
+                        }
+                        saveAttendanceAndReturn(name, phone, dept, year);
+                    },
+                    () => { alert("Please allow GPS Location permission to mark attendance!"); }
+                );
+            } else {
+                saveAttendanceAndReturn(name, phone, dept, year);
+            }
+        }
+
+        function saveAttendanceAndReturn(name, phone, dept, year) {
+    const todayStr = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD (e.g. 2026-10-21)
+    const list = JSON.parse(localStorage.getItem("bu_care_attendance") || "[]");
+    
+    list.push({
+        studentName: name,
+        phone: phone,
+        courseYear: `${dept} - ${year}`,
+        dateOnly: todayStr, // <-- Har din ko alag rakhne ke liye
+        timestamp: new Date().toLocaleString(),
+        ip: liveUserIp
+    });
+    localStorage.setItem("bu_care_attendance", JSON.stringify(list));
+
+    // Lock this IP/Phone for 1 Hour 10 Minutes (70 mins)
+    localStorage.setItem("bu_att_lock", JSON.stringify({
+        timestamp: Date.now(),
+        ip: liveUserIp
+    }));
+
+    alert(`✅ Attendance Marked Successfully for ${name} (${dept} - ${year})!\n\nYour phone/IP is now locked for 1 Hour 10 Minutes.`);
+    document.getElementById("attStudentName").value = "";
+    document.getElementById("attStudentPhone").value = "";
+    showView("landingView");
+}
+
+        // ============================================================================
+        // 5. STAFF / ADMIN LOGIN & FULL-SCREEN DASHBOARD (Bu0001 vs Boss0101)
+        // ============================================================================
+        function handleStaffLogin(e) {
+            e.preventDefault();
+            const idInput = document.getElementById("staffIdInput").value.trim();
+            const passInput = document.getElementById("staffPassInput").value.trim();
+
+            if (idInput === STAFF_CREDENTIALS.faculty.id && passInput === STAFF_CREDENTIALS.faculty.pass) {
+                currentStaffRole = "faculty";
+                openFullStaffDashboard(STAFF_CREDENTIALS.faculty.roleName);
+            } else if (idInput === STAFF_CREDENTIALS.admin.id && passInput === STAFF_CREDENTIALS.admin.pass) {
+                currentStaffRole = "admin";
+                openFullStaffDashboard(STAFF_CREDENTIALS.admin.roleName);
+            } else {
+                alert("❌ Wrong ID or Password! Please check your Faculty or Admin credentials.");
+            }
+        }
+
+        function openFullStaffDashboard(roleTitle) {
+            document.getElementById("staffRoleBadge").innerText = roleTitle;
+
+            // Boss0101 gets 3rd Tab (Registered Students) + GPS Switch; Bu0001 gets only Attendance & Complaints
+            if (currentStaffRole === "admin") {
+                document.getElementById("tabBtnStudents").style.display = "inline-block";
+                document.getElementById("gpsToggleBtn").style.display = "inline-block";
+                updateGpsButtonUI();
+            } else {
+                document.getElementById("tabBtnStudents").style.display = "none";
+                document.getElementById("gpsToggleBtn").style.display = "none";
+            }
+
+            showView("staffDashboardView");
+            switchDashboardTab("attendance");
+        }
+
+        function switchDashboardTab(tabName) {
+            document.querySelectorAll(".dash-tab-btn").forEach(b => b.classList.remove("active"));
+            document.getElementById("dashTabAttendance").style.display = "none";
+            document.getElementById("dashTabComplaints").style.display = "none";
+            document.getElementById("dashTabStudents").style.display = "none";
+
+            if (tabName === "attendance") {
+                document.getElementById("tabBtnAttendance").classList.add("active");
+                document.getElementById("dashTabAttendance").style.display = "block";
+            } else if (tabName === "complaints") {
+                document.getElementById("tabBtnComplaints").classList.add("active");
+                document.getElementById("dashTabComplaints").style.display = "block";
+            } else if (tabName === "students" && currentStaffRole === "admin") {
+                document.getElementById("tabBtnStudents").classList.add("active");
+                document.getElementById("dashTabStudents").style.display = "block";
+            }
+
+            renderDashboardData();
+        }
+
+        function toggleGpsStrictMode() {
+            const cur = localStorage.getItem("bu_gps_strict") === "true";
+            localStorage.setItem("bu_gps_strict", (!cur).toString());
+            updateGpsButtonUI();
+        }
+
+        function updateGpsButtonUI() {
+            const isStrict = localStorage.getItem("bu_gps_strict") === "true";
+            const btn = document.getElementById("gpsToggleBtn");
+            btn.style.background = isStrict ? "#10b981" : "#475569";
+            btn.style.color = "white";
+            btn.innerHTML = isStrict ? `📍 GPS Campus Lock: ON` : `📍 GPS Campus Lock: OFF (Testing)`;
+        }
+
+    
+            function renderDashboardData() {
+            const dateInput = document.getElementById("adminDateFilter");
+            const todayStr = new Date().toISOString().split('T')[0];
+            
+            // Agar calendar khali hai toh automatically AAJ ki date set kar do
+            if (!dateInput.value) {
+                dateInput.value = todayStr;
+            }
+            const selectedDate = dateInput.value;
+
+            document.getElementById("reportDateDisplay").innerText = selectedDate + " (Printed: " + new Date().toLocaleTimeString() + ")";
+
+            // 1. Attendance Table (Filtered by Selected Date + Batch -> Starts from S.No 1 every day!)
+            const allAtt = JSON.parse(localStorage.getItem("bu_care_attendance") || "[]");
+            const filterVal = document.getElementById("adminAttendanceFilter").value;
+            
+            const filteredAtt = allAtt.filter(a => {
+                const recordDate = a.dateOnly || todayStr; // Purane records ko aaj ka maan lega
+                const dateMatch = (recordDate === selectedDate);
+                const batchMatch = (filterVal === "ALL") || (a.courseYear === filterVal);
+                return dateMatch && batchMatch;
+            });
+
+            const attTbody = document.getElementById("attendanceTableBody");
+            if (filteredAtt.length === 0) {
+                attTbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px; color:#64748b;">No attendance marked on <strong>${selectedDate}</strong> for this batch.</td></tr>`;
+            } else {
+                attTbody.innerHTML = filteredAtt.map((item, idx) => `
+                    <tr>
+                        <td><strong>${idx + 1}</strong></td>
+                        <td><strong>${item.studentName}</strong></td>
+                        <td>+91-${item.phone}</td>
+                        <td>${item.courseYear}</td>
+                        <td>${item.timestamp} (IP: ${item.ip})</td>
+                    </tr>
+                `).join("");
+            }
+            document.getElementById("attendanceTotalCount").innerText = filteredAtt.length;
+
+            // 2. Complaints Table
+            const allComp = JSON.parse(localStorage.getItem("bu_care_complaints") || "[]");
+            const compTbody = document.getElementById("complaintsTableBody");
+            if (allComp.length === 0) {
+                compTbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 20px; color:#64748b;">No complaints logged yet.</td></tr>`;
+            } else {
+                compTbody.innerHTML = allComp.map(c => `
+                    <tr>
+                        <td><strong>#BU-${c.ticketNumber}</strong></td>
+                        <td>${c.studentName}<br><small>${c.phone}</small></td>
+                        <td>${c.dept} (${c.batch})<br><small>${c.location}</small></td>
+                        <td><strong style="color:${c.isCritical ? '#ef4444' : '#0866ff'};">${c.category}</strong></td>
+                        <td>${c.summary}</td>
+                        <td>"${c.fullText}"</td>
+                    </tr>
+                `).join("");
+            }
+
+            // 3. Registered Students Table (Super Admin Boss0101 Only)
+            if (currentStaffRole === "admin") {
+                const allStu = JSON.parse(localStorage.getItem("bu_care_students") || "[]");
+                const stuTbody = document.getElementById("studentsTableBody");
+                if (allStu.length === 0) {
+                    stuTbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 20px; color:#64748b;">No students registered yet.</td></tr>`;
+                } else {
+                    stuTbody.innerHTML = allStu.map((u, idx) => `
+                        <tr>
+                            <td><strong>${idx + 1}</strong></td>
+                            <td><strong>${u.fullName}</strong></td>
+                            <td>+91-${u.phone}</td>
+                            <td>${u.email}</td>
+                            <td>${u.dob}</td>
+                            <td>${u.registeredAt}</td>
+                        </tr>
+                    `).join("");
+                }
+            }
+        }
+
+        function downloadAttendanceExcel() {
+            const allAtt = JSON.parse(localStorage.getItem("bu_care_attendance") || "[]");
+            const filterVal = document.getElementById("adminAttendanceFilter").value;
+            const filteredAtt = (filterVal === "ALL") ? allAtt : allAtt.filter(a => a.courseYear === filterVal);
+
+            if (filteredAtt.length === 0) {
+                alert("No attendance records to export!");
+                return;
+            }
+
+            let csv = "S.No,Student Name,Phone Number,Department & Year,Timestamp\n";
+            filteredAtt.forEach((r, idx) => {
+                csv += `${idx + 1},"${r.studentName}","${r.phone}","${r.courseYear}","${r.timestamp}"\n`;
+            });
+            csv += `\nTotal Students Present,${filteredAtt.length}\n`;
+
+            const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "BU_Attendance_List.csv";
+            a.click();
+        }
+
+        // ============================================================================
+        // 6. COMPLAINT PORTAL & SILENT MULTI-ADMIN WHATSAPP BOT
+        // ============================================================================
+        function selectCategory(card, name) {
+            document.querySelectorAll(".category-card").forEach(c => c.classList.remove("selected"));
+            card.classList.add("selected");
+            selectedCategory = name;
+        }
+
+        function goCompStep(step) {
+            if (step === 2 && (!selectedCategory || !document.getElementById("location").value)) {
+                alert("Please select category and location!");
+                return;
+            }
+            if (step === 3 && (!document.getElementById("department").value || !document.getElementById("batchYear").value)) {
+                alert("Please select your Department and Year!");
+                return;
+            }
+            document.getElementById("compStep1").style.display = (step === 1) ? "block" : "none";
+            document.getElementById("compStep2").style.display = (step === 2) ? "block" : "none";
+            document.getElementById("compStep3").style.display = (step === 3) ? "block" : "none";
+        }
+
+        function toggleAnonymous() {
+            isAnonymous = !isAnonymous;
+            document.getElementById("anonCheckbox").checked = isAnonymous;
+            document.getElementById("anonBox").classList.toggle("active", isAnonymous);
+            document.getElementById("personalDetails").style.display = isAnonymous ? "none" : "block";
+        }
+
+        function checkOtherDepartment() {
+            const isOther = document.getElementById("department").value === "Other";
+            document.getElementById("otherDeptContainer").style.display = isOther ? "block" : "none";
+        }
+
+        document.getElementById("smartForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const loc = document.getElementById("location").value;
+            const deptVal = document.getElementById("department").value;
+            const finalDept = (deptVal === "Other") ? document.getElementById("otherDeptInput").value.trim() : deptVal;
+            const batch = document.getElementById("batchYear").value;
+            const stuName = isAnonymous ? "Anonymous Student" : (document.getElementById("studentName").value.trim() || "BU Student");
+            const desc = document.getElementById("description").value.trim();
+            const ticketNumber = Math.floor(100000 + Math.random() * 900000);
+
+            const criticalKeywords = ["ragging", "rag", "bully", "harass", "marpeet", "maar peet", "pitai", "senior", "abuse", "threat", "fight", "torture"];
+            const isCritical = selectedCategory.includes("Ragging") || criticalKeywords.some(k => desc.toLowerCase().includes(k));
+            const summary = `[${finalDept} | ${loc}] ${desc.substring(0, 180)} — ${isCritical ? '🚨 URGENT ANTI-RAGGING ACTION' : '✅ Standard Review'}`;
+
+            const compList = JSON.parse(localStorage.getItem("bu_care_complaints") || "[]");
+            compList.unshift({
+                ticketNumber,
+                studentName: stuName,
+                phone: isAnonymous ? "Hidden" : (currentStudent?.phone || "N/A"),
+                dept: finalDept,
+                batch,
+                location: loc,
+                category: selectedCategory,
+                summary,
+                fullText: desc,
+                isCritical
+            });
+            localStorage.setItem("bu_care_complaints", JSON.stringify(compList));
+
+            document.getElementById("smartForm").style.display = "none";
+            document.getElementById("successScreen").style.display = "block";
+            document.getElementById("ticketId").innerText = ticketNumber;
+            document.getElementById("aiSummaryText").innerText = summary;
+
+            const badge = document.getElementById("severityBadge");
+            if (isCritical) {
+                badge.innerText = "CRITICAL / RAGGING SOS";
+                badge.style.background = "#ef4444";
+                document.getElementById("aiAlertBox").style.display = "block";
+
+                // Silent Background WhatsApp Dispatch to All Active Admins
+                const waText = `🚨 *BU ANTI-RAGGING SOS* 🚨\nTicket: #BU-${ticketNumber}\nDept: ${finalDept} (${batch})\nLocation: ${loc}\nStudent: ${stuName}\nSummary: ${summary}`;
+                const activeAdmins = EMERGENCY_CONTACTS.filter(a => a.active);
+                activeAdmins.forEach(admin => {
+                    if (admin.phone && admin.apiKey) {
+                        fetch(`https://api.callmebot.com/whatsapp.php?phone=${admin.phone}&text=${encodeURIComponent(waText)}&apikey=${admin.apiKey}`, { mode: "no-cors" });
+                    }
+                });
+
+                setTimeout(() => {
+                    document.getElementById("waLog2").style.display = "block";
+                    document.getElementById("waLog2").innerText = `✅ WhatsApp Alert Dispatched to ${activeAdmins.map(a => a.role).join(", ")}!`;
+                }, 1200);
+            } else {
+                badge.innerText = "NORMAL PRIORITY";
+                badge.style.background = "#3b82f6";
+                document.getElementById("aiAlertBox").style.display = "none";
+            }
+        });
+
+        function resetComplaintForm() {
+            document.getElementById("smartForm").reset();
+            document.getElementById("successScreen").style.display = "none";
+            document.getElementById("smartForm").style.display = "block";
+            goCompStep(1);
+        }
+   // Initialize Lock Status on Load    checkLandingAttendanceLock();
+   </script>
+</body>
+</html>
